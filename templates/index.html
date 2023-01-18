@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/0197893414.js" crossorigin="anonymous"></script>
+</head>
+  </head>
+  <body class="bg-stone-200">
+    <div class="container bg-white w-4/5 mt-12 m-auto p-5">
+     
+
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Book ID
+                </th> 
+                <th scope="col" class="px-6 py-3">
+                    Book Name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Book Cover
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Author Name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Status
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Start Date
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    End Date
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Rate
+                </th>
+            </tr>
+        </thead>
+        {% block content %} 
+        {% for book in books %}
+        <tbody>
+            <tr class="bg-white border-b  dark:border-gray-700">
+               <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                    {{book.bookId}}
+                </th> 
+                
+                <td class="px-6 py-4">
+                    {{book.bookName}}
+                </td>
+                <td class="px-6 py-4">
+                    <img src={{book.bookImage.url}} alt="" srcset="" width="50" class="rounded-full">
+                </td>
+                <td class="px-6 py-4">
+                    {{book.AuthorName}}
+                </td>
+                <td class="px-6 py-4">
+                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                         {{book.status}}</a>
+                </td>
+                <td class="px-6 py-4">
+                    {{book.startDate}}
+                </td>
+                <td class="px-6 py-4">
+                    {{book.endDate}}
+                </td>
+                <td class="px-6 py-4">
+                    {% if book.rate == 5 %}
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    {% elif book.rate == 4 %}
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    {% elif book.rate == 3 %}
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    {% elif book.rate == 2 %}
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    {% elif book.rate == 1 %}
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    {% else %}
+                        not rated 
+
+                    {% endif %}
+                </td>
+                
+            </tr>
+            
+        </tbody>
+       
+
+
+{% endfor %} {% endblock content %}
+    </table>
+
+
+    </div>
+  </body>
+</html>
