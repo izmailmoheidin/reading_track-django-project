@@ -101,10 +101,10 @@
         </tbody>
        
 
-
 {% endfor %} {% endblock content %}
     </table>
-
+    <span>{{request.user}}</span>
+<span><a href="{% url 'logout' %}">logout</a></span
 
     </div>
   </body>
