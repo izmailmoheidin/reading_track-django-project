@@ -1,0 +1,9 @@
+{% block content %}
+<p> are u want to delete this book {{item}}"? </p>
+<form action = "{% url 'deleteBooks' item.id %}" method = "POST">
+    {% csrf_token %}
+    <a href = "{% url "index" %}" > cancel </a>
+    <input type = "submit" name = "confirm">
+</form>
+
+{% endblock content %}

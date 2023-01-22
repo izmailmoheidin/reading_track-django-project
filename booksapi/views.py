@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import BooK
-from .forms import creationUserForm
+from .forms import creationUserForm, BookForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -9,7 +9,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 
-# Create your views here.
+# index veiw
 @login_required(login_url='login')
 def index(request):
     books = BooK.objects.all()
@@ -18,7 +18,7 @@ def index(request):
     }
     return render(request, 'index.html',context )
 
-
+# regster view
 def registerPage(request):
     form = creationUserForm()
     
@@ -33,6 +33,7 @@ def registerPage(request):
     context = {'form': form}
     return render(request, 'registerForm.html', context)
 
+# login veiw
 def loginPage(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -51,4 +52,38 @@ def loginPage(request):
 def logoutPage(request):
     logout(request)
     return redirect ('login') 
+
+def createBook(request):
+    form = BookForm()
+    if request.method == 'POST':
+        form = BookForm(request.POST)
+        if form.is_valid:
+            form.save()
+            
+    context={'form': form}
+    return render(request , 'createBook.html',context )
+
+def bookUpdate(request, pk):
+    book = BooK.objects.get(bookId=pk)
+    form = BookForm(instance=book)
+    
+    if request.method == 'POST':
+        form = BookForm(request.POST,instance=book )
+        if form.is_valid:
+            form.save()
+            return redirect('index') 
+    context={'form': form}
+    return render(request , 'createBook.html',context )
+
+def deleteBook(request, pk):
+    book = BooK.objects.get(bookId=pk),
+    if request.method=='POST':
+        book.delete()
+        return redirect('index') 
+        
+        
+    
+    context={'item': book}
+    return render(request ,  "delete.html", context)
+    
           

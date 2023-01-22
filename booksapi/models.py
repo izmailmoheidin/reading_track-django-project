@@ -13,6 +13,7 @@ class BooK(models.Model):
    bookImage = models.ImageField(blank=True)
    
    
-   
+   def __str__(self):
+      return self.bookName
   
    
